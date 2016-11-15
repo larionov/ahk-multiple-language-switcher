@@ -1,6 +1,7 @@
-# ahk-multiple-language-switcher
-AutoHotKey script to set different key bindings for different keyboard layouts
+# Multiple language switcher
+[AutoHotKey](https://autohotkey.com) script to set different key bindings for different keyboard layouts
 
+# Installation
 To install put AutoHotkey.ahk into your documents folder.
 
 By default it has 4 layouts set up:

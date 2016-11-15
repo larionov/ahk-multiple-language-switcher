@@ -1,7 +1,7 @@
 # ahk-multiple-language-switcher
 AutoHotKey script to set different key bindings for different keyboard layouts
 
-To install put in into your documents folder.
+To install put AutoHotkey.ahk into your documents folder.
 
 By default it has 4 layouts set up:
 * Break - CN/EN

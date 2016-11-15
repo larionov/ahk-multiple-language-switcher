@@ -5,6 +5,13 @@ jp := DllCall("LoadKeyboardLayout", "Str", "00000411", "Int", 1)
 pp := A_PriorKey
 
 defaultLn := en
+SetLayout(language)
+{
+  ControlGetFocus, control, A
+  ;SplashTextOn,,, % "" . language
+  PostMessage 0x50, 0, %language%, %control%, A ; WM_INPUTLANGCHANGEREQUEST
+}
+
 ; Break/Pause button, wait for release
 Break Up::
 	w := DllCall("GetForegroundWindow")
@@ -12,9 +19,9 @@ Break Up::
 	l := DllCall("GetKeyboardLayout", "UInt", pid)
 
 	if (l = cn) {
-	    PostMessage 0x50, 0, %defaultLn%,, A
+		SetLayout(defaultLn)
 	} else {
-	    PostMessage 0x50, 0, %cn%,, A
+		SetLayout(cn)
 	}
 	Return
 
@@ -31,9 +38,9 @@ Break Up::
 		l := DllCall("GetKeyboardLayout", "UInt", pid)
 
 		if (l = jp) {
-		    PostMessage 0x50, 0, %defaultLn%,, A
+			SetLayout(defaultLn)
 		} else {
-		    PostMessage 0x50, 0, %jp%,, A
+			SetLayout(jp)
 		}
 	}
 	pp := p
@@ -46,16 +53,15 @@ Break Up::
 	t := A_TimeSincePriorHotkey
 
 	; If any other keys were pressed don't change language (like ctrl+shift+tab)
-	; SplashTextOn,,, % "1" . p . " "  . pp . " " . t
+	 
 	if (( p = "LShift" || p = "LControl") && t > 140) {
 		w := DllCall("GetForegroundWindow")
 		pid := DllCall("GetWindowThreadProcessId", "UInt", w, "Ptr", 0)
 		l := DllCall("GetKeyboardLayout", "UInt", pid)
-
 		if (l = en) {
-		    PostMessage 0x50, 0, %ru%,, A
+			SetLayout(ru)
 		} else {
-		    PostMessage 0x50, 0, %en%,, A
+			SetLayout(en)
 		}
 	} 
 	pp := p
